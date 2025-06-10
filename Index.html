@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Eu te amo minha princesinha ♡</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+    .timer {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+    .text {
+      margin-top: 20px;
+      line-height: 1.8;
+    }
+    .link {
+      margin-top: 30px;
+      font-weight: bold;
+    }
+    .link a {
+      color: red;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    .hearts {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Eu te amo minha princesinha ♡</h1>
+    <div class="timer" id="contador"></div>
+    <hr>
+    <div class="text">
+      <p>Oi amor, tudo bem? Hoje faz um mês que estamos juntos, não parece muito tempo, mas pensando que nós nos conhecemos há uns 4 anos, a gente tá mandando bem, né?</p>
+      <p>Eu te amo muito, sabia? Te amei ontem, te amo hoje e te amarei para sempre.</p>
+      <div class="hearts">💑💞💑</div>
+      <p>Você é incrível, faz meus dias cinzas terem mais cores, faz meu silêncio tocar música, faz minha tempestade virar calmaria... por isso eu quero te pedir algo:</p>
+      <div class="link"><a href="foto.html">APERTA AQUI CRIANÇA 🖐</a></div>
+    </div>
+  </div>
+
+  <script>
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 26);
+    startDate.setHours(startDate.getHours() - 19);
+    startDate.setMinutes(startDate.getMinutes() - 52);
+    startDate.setSeconds(startDate.getSeconds() - 37);
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diferenca = agora - startDate;
+
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+      const segundos = Math.floor((diferenca / 1000) % 60);
+
+      document.getElementById('contador').innerText = 
+        `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+  </script>
+</body>
+</html>
