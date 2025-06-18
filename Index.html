@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 30px;
+      overflow: hidden;
     }
     .container {
       max-width: 600px;
@@ -18,6 +19,8 @@
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
     }
     .timer {
       font-size: 20px;
@@ -31,14 +34,38 @@
       margin-top: 30px;
       font-weight: bold;
     }
-    .link a {
-      color: red;
-      text-decoration: none;
-      font-size: 20px;
+    .link button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .link button:hover {
+      background-color: #ff4d4d;
     }
     .hearts {
       font-size: 24px;
       margin: 10px 0;
+    }
+    .heart {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      animation: fall linear forwards;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -48,20 +75,16 @@
     <div class="timer" id="contador"></div>
     <hr>
     <div class="text">
-      <p>Oi amor, tudo bem? Hoje faz um mês que estamos juntos, não parece muito tempo, mas pensando que nós nos conhecemos há uns 4 anos, a gente tá mandando bem, né?</p>
+      <p>Oi amor, tudo bem? Estou passando aqui pra lembrar você que eu te amo de todo coração. Digo que Deus foi legal quando mandou você como minha colega de crisma, ele mandou muito bem quando te tornou minha melhor amiga, mas sinceramente... Ele acertou demais em fazer de você minha namorada, foi a melhor decisão que Deus me ajudou a tomar!!</p>
       <p>Eu te amo muito, sabia? Te amei ontem, te amo hoje e te amarei para sempre.</p>
       <div class="hearts">💑💞💑</div>
       <p>Você é incrível, faz meus dias cinzas terem mais cores, faz meu silêncio tocar música, faz minha tempestade virar calmaria... por isso eu quero te pedir algo:</p>
-      <div class="link"><a href="foto.html">APERTA AQUI CRIANÇA 🖐</a></div>
+      <div class="link"><button onclick="startHearts()">APERTA AQUI CRIANÇA 🖐</button></div>
     </div>
   </div>
 
   <script>
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 26);
-    startDate.setHours(startDate.getHours() - 19);
-    startDate.setMinutes(startDate.getMinutes() - 52);
-    startDate.setSeconds(startDate.getSeconds() - 37);
+    const startDate = new Date("2025-04-23T00:00:00");
 
     function atualizarContador() {
       const agora = new Date();
@@ -78,6 +101,29 @@
 
     setInterval(atualizarContador, 1000);
     atualizarContador();
+
+    function startHearts() {
+      const colors = ['#ff4d4d', '#ff66cc', '#ff1a75', '#ff9999'];
+      const emojis = ['❤️', '💕', '💖', '💗', '💞'];
+
+      const interval = setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 200);
+
+      // Para parar a chuva depois de 15 segundos, se quiser
+      setTimeout(() => clearInterval(interval), 15000);
+    }
   </script>
 </body>
 </html>
